@@ -1,0 +1,20 @@
+package classExercises;
+
+public class HiddenPart {
+	public String word2guess() {
+		String[] words = new String[10];
+		words[0] = "programming";
+		words[1] = "gameplay";
+		words[2] = "username";
+		words[3] = "password";
+		words[4] = "ethernet";
+		words[5] = "google";
+		words[6] = "transaction";
+		words[7] = "information";
+		words[8] = "windows";
+		words[9] = "variable";
+		int rnd = (int) (Math.random() * 10);
+		String word = words[rnd];
+		return word;
+	}
+}
