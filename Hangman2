@@ -1,0 +1,52 @@
+package classExercises;
+
+import java.util.Scanner;
+
+public class Hangman2 {
+
+	public static int indexOfChar(char[] array, cahr toFind) {
+		for (int i = 0; i < array.length; i++) {
+			if (toFind == array[i]) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	public static void main(String[] args) {
+		char[] a = { 'f', 'a', 'n', 't', 'a', 's', 't', 'i', 'c' };
+		char[] b = { '*', '*', '*', '*', '*', '*', '*', '*', '*' };
+
+		System.out.println(b);
+
+		int lives = 5;
+
+		while (true) {
+			// user input
+			Scanner scanner = new Scanner(System.in);
+			char guess = scanner.next().charAt(0);
+
+			boolean isStrike = true;
+			for (int i = 0; i < b.length; i++) {
+				if (a[i] == guess) {
+					b[i] = guess;
+					isStrike = false;
+				}
+			}
+			// check if the user missed and update lives
+			if (isStrike == true) {
+				lives--;
+			}
+			// check if the user died
+			if (lives == 0) {
+				System.out.println("YOU DIED X X X X X X X X ! BYE BYE! !");
+				break;
+			}
+
+			System.out.println(b);
+
+			// check if won the game
+		}
+	}
+
+}
