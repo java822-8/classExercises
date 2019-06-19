@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Hangman2 {
 
-	public static int indexOfChar(char[] array, cahr toFind) {
+	public static int indexOfChar(char[] array, char toFind) {
 		for (int i = 0; i < array.length; i++) {
 			if (toFind == array[i]) {
 				return i;
