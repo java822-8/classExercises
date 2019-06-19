@@ -1,0 +1,68 @@
+package classExercises;
+
+//Main.java
+import java.util.Scanner;
+
+public class HangMan {
+	public static void main(String[] args) {
+		HiddenPart randWord = new HiddenPart();
+		String word = randWord.word2guess();
+		int errors = 5;
+		boolean win = false;
+		char[] letters_array = word.toCharArray();
+		char[] hidden_letters = new char[letters_array.length];
+		for (int i = 0; i < hidden_letters.length; i++) {
+			hidden_letters[i] = '_';
+		}
+		print(hidden_letters);
+		System.out.println("\nGuess the letter");
+		while (win == false) {
+			errors = input(letters_array, hidden_letters, errors);
+			System.out.println("\nYou have " + errors + " tries left");
+			if (errors == 0) {
+				break;
+			}
+			win = winCheck(win, hidden_letters);
+		}
+		if (win) {
+			System.out.println("\nCONGRATULATION!!!! YOU WIN!!!");
+		} else {
+			System.out.println("\nThe word was " + word);
+			System.out.println("\nLooser!!!");
+		}
+	}
+
+	public static void print(char[] hidden_letters) {
+		System.out.println("Word to guess:");
+		for (int i = 0; i < hidden_letters.length; i++) {
+			System.out.print(hidden_letters[i] + " ");
+		}
+	}
+
+	public static int input(char[] letters_array, char[] hidden_letters, int errors) {
+		boolean flag = false;
+		Scanner sc = new Scanner(System.in);
+		char chr2check = sc.next().charAt(0);
+		for (int i = 0; i < letters_array.length; i++) {
+			if (chr2check == letters_array[i]) {
+				hidden_letters[i] = letters_array[i];
+				flag = true;
+			}
+			if (i == letters_array.length - 1 && flag == false) {
+				errors--;
+			}
+		}
+		print(hidden_letters);
+		return errors;
+	}
+
+	public static boolean winCheck(boolean win, char[] hidden_letters) {
+		for (int i = 0; i < hidden_letters.length; i++) {
+			if (hidden_letters[i] == '_') {
+				return win;
+			}
+		}
+		win = true;
+		return win;
+	}
+}
