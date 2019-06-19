@@ -12,7 +12,7 @@ public class FlipFlopElegantVer {
 				s += "Flop";
 			}
 			if (s.length() == 0) {
-				s = String.valueOf(i);
+				s = String.valueOf(i); // alternatively: s = "" + i;
 			}
 			System.out.println(s);
 		}
