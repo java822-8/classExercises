@@ -1,0 +1,82 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class colorGameNirSolution {
+
+	public static int indexOfChar(char[] array, char toFind) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == toFind) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	public static void main(String[] args) {
+		char[] colors = { 'o', 'r', 'g', 'b', 'y' };
+		char[] chosen = new char[3];
+
+		Random rand = new Random();
+		int j = rand.nextInt(5);
+		chosen[0] = colors[j];
+		colors[j] = colors[4];
+		j = rand.nextInt(4);
+		chosen[1] = colors[j];
+		colors[j] = colors[3];
+		j = rand.nextInt(3);
+		chosen[2] = colors[j];
+
+		// ALTERNATIVE WAY
+		/*
+		 * chosen[0] = colors[rand.nextInt(5)];
+		 * 
+		 * chosen[1] = colors[rand.nextInt(5)]; while (chosen[0] == chosen[1]) {
+		 * chosen[1] = colors[rand.nextInt(5)]; }
+		 * 
+		 * chosen[2] = colors[rand.nextInt(5)]; while (chosen[2] == chosen[0] ||
+		 * chosen[2] == chosen[1]) { chosen[2] = colors[rand.nextInt(5)];
+		 * 
+		 * }
+		 */
+
+		System.out.println("chosen:");
+		System.out.println(chosen);
+
+		Scanner scanner = new Scanner(System.in);
+		char[] guess = new char[3];
+
+		int counter = 1;
+		while (true) {
+
+			// Reading input from user
+			for (int i = 0; i < guess.length; i++) {
+				guess[i] = scanner.next().charAt(0);
+				if (guess[i] == 'x') {
+					return;
+				}
+			}
+
+			int hitsCounter = 0;
+			// Check user guess against the chosen array
+			for (int i = 0; i < guess.length; i++) {
+				int checkLocation = indexOfChar(chosen, guess[i]);
+				if (checkLocation == i) {
+					System.out.print("X");
+					hitsCounter++;
+				} else if (checkLocation >= 0) {
+					System.out.print("O");
+				} else {
+					System.out.print("_");
+				}
+			}
+
+			// check if won
+			System.out.println();
+			if (hitsCounter == chosen.length) {
+				System.out.println("You won in " + counter + " tries");
+				return;
+			}
+			counter++;
+		}
+	}
+}
